@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:  # Permette esecuzione manuale
+  workflow_dispatch:
 
 jobs:
   # Job 1: Build e Test
@@ -34,31 +34,29 @@ jobs:
         analyzer = SentimentAnalyzer()
         result = analyzer.predict('Test validation')
         assert 'sentiment' in result
-        print('✅ Model validation passed!')
+        print('Model validation passed!')
         "
 
   # Job 2: Deploy su HuggingFace Spaces
   deploy-to-huggingface:
     runs-on: ubuntu-latest
-    needs: build-and-test  # Parte solo se i test passano
+    needs: build-and-test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     
     steps:
     - uses: actions/checkout@v3
     
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+    
+    - name: Install huggingface_hub
+      run: pip install huggingface_hub
+    
     - name: Deploy to HuggingFace Spaces
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
       run: |
-        pip install huggingface_hub
-        python -c "
-        from huggingface_hub import HfApi
-        api = HfApi()
-        api.upload_folder(
-            folder_path='.',
-            repo_id='${{ secrets.HF_SPACE_NAME }}',
-            repo_type='space',
-            token='${{ secrets.HF_TOKEN }}'
-        )
-        print('✅ Deployed to HuggingFace Spaces!')
-        "
+        huggingface-cli login --token $HF_TOKEN
+        huggingface-cli upload celli77777/sentiment_Analysis . . -
