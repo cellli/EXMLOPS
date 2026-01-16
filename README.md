@@ -1,10 +1,10 @@
-# 🚀 MachineInnovators Inc. - Sentiment Analysis System
+# MachineInnovators Inc. - Sentiment Analysis System
 
 [![CI/CD Pipeline](https://github.com/cellli/Machine-Innovators-Sentiment/actions/workflows/ci_pipeline.yml/badge.svg)](https://github.com/cellli/Machine-Innovators-Sentiment/actions/workflows/ci_pipeline.yml)
 
 Sistema MLOps completo per il monitoraggio della reputazione online attraverso l'analisi del sentiment.
 
-## 📋 Panoramica
+## Panoramica
 
 Questo progetto implementa un sistema end-to-end per:
 - **Analisi automatica del sentiment** di testi da social media
@@ -12,7 +12,7 @@ Questo progetto implementa un sistema end-to-end per:
 - **Pipeline CI/CD** per testing e deployment automatizzati
 - **Sistema di retraining** per mantenere il modello aggiornato
 
-## 🏗️ Architettura
+## Architettura
 
 ```
 machine_innovators_sentiment/
@@ -26,7 +26,7 @@ machine_innovators_sentiment/
         └── ci_pipeline.yml  # Pipeline CI/CD
 ```
 
-## 🤖 Modello
+## Modello
 
 - **Modello**: `cardiffnlp/twitter-roberta-base-sentiment-latest`
 - **Architettura**: RoBERTa (Transformer)
@@ -41,7 +41,7 @@ machine_innovators_sentiment/
 | F1-Score (macro) | 70% |
 | Confidenza media | 85% |
 
-## 🚀 Quick Start
+## Quick Start
 
 ```python
 from app import SentimentAnalyzer
@@ -55,7 +55,7 @@ print(result)
 # Output: {'sentiment': 'Positive', 'confidence': 0.95, 'scores': {...}}
 ```
 
-## 📊 Sistema di Monitoraggio
+## Sistema di Monitoraggio
 
 Il modulo `monitoring.py` traccia:
 - Distribuzione dei sentiment nel tempo
@@ -70,19 +70,19 @@ alerts = monitor.log_prediction(text, result)
 print(monitor.get_summary_report())
 ```
 
-## 🔄 CI/CD Pipeline
+## CI/CD Pipeline
 
 La pipeline GitHub Actions esegue automaticamente:
 1. **Build & Test**: Test unitari ad ogni push
 2. **Performance Check**: Benchmark su main branch
 3. **Scheduled Retraining**: Check settimanale per retraining
 
-## ⚠️ Limitazioni Note
+## Limitazioni Note
 
 - Il modello è ottimizzato per **testi in inglese**
 - Testi in italiano possono avere accuratezza ridotta
 - Per supporto multilingua, considerare modelli come `xlm-roberta`
 
-## 📝 Licenza
+## Licenza
 
 MIT License - MachineInnovators Inc. 2024
