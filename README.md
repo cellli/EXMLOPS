@@ -12,19 +12,6 @@ Questo progetto implementa un sistema end-to-end per:
 - **Pipeline CI/CD** per testing e deployment automatizzati
 - **Sistema di retraining** per mantenere il modello aggiornato
 
-## Architettura
-
-```
-machine_innovators_sentiment/
-├── app.py              # Modulo principale (SentimentAnalyzer)
-├── test_app.py         # Test unitari
-├── monitoring.py       # Sistema di monitoraggio
-├── retrain.py          # Logica di retraining
-├── requirements.txt    # Dipendenze Python
-└── .github/
-    └── workflows/
-        └── ci_pipeline.yml  # Pipeline CI/CD
-```
 
 ## Modello
 
