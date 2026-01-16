@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Job 1: Build e Test
   build-and-test:
     runs-on: ubuntu-latest
     steps:
@@ -37,7 +36,6 @@ jobs:
         print('Model validation passed!')
         "
 
-  # Job 2: Deploy su HuggingFace Spaces
   deploy-to-huggingface:
     runs-on: ubuntu-latest
     needs: build-and-test
@@ -58,5 +56,14 @@ jobs:
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
       run: |
-        huggingface-cli login --token $HF_TOKEN
-        huggingface-cli upload celli77777/sentiment_Analysis . . -
+        python << 'EOF'
+        from huggingface_hub import HfApi
+        api = HfApi()
+        api.upload_folder(
+            folder_path=".",
+            repo_id="celli77777/sentiment_Analysis",
+            repo_type="space",
+            token="${{ secrets.HF_TOKEN }}"
+        )
+        print("Deployed to HuggingFace!")
+        EOF
